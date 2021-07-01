@@ -1,0 +1,52 @@
+<template>
+    <v-card
+        class="mx-auto"
+        max-width="400"
+        tile
+        v-if="users && users.length"
+    >
+        <v-list-item v-for="user in users" :key="user.id">
+            <v-list-item-content>
+                <v-list-item-title>{{ user.name }}</v-list-item-title>
+                <v-list-item-subtitle>
+                    {{ user.username }}
+                </v-list-item-subtitle>
+                <v-list-item-subtitle>
+                    {{ user.email }}, <span v-if="user.email_verified_at" style="color: green; margin-left: 20px">Verified</span>
+                </v-list-item-subtitle>
+            </v-list-item-content>
+        </v-list-item>
+    </v-card>
+</template>
+
+<script>
+import {HTTP} from "@/plugins/http";
+
+export default {
+    name: "people.vue",
+    data() {
+        return {
+            users: []
+        }
+    },
+    mounted() {
+        this.getUsers();
+    },
+    methods: {
+        async getUsers() {
+            await HTTP.get('/api/users')
+                .then((response) => {
+                    this.users = response.data;
+                    console.log(this.users)
+                })
+                .catch(error => {
+                    //generateErrors({commit, dispatch}, error, err, "Error Logging out!", false);
+                });
+        }
+    }
+}
+</script>
+
+<style scoped>
+
+</style>
