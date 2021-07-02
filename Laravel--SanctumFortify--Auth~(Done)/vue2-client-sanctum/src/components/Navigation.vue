@@ -1,30 +1,46 @@
 <template>
-    <v-app-bar app>
-        <v-tabs>
-            <v-tab>
-                <router-link to="/">Home</router-link>
-            </v-tab>
-            <template v-if="!user">
-                <v-tab>
-                    <router-link to="/register">Register</router-link>
-                </v-tab>
-                <v-tab>
-                    <router-link to="/login">Login</router-link>
-                </v-tab>
+    <v-app-bar
+        app
+        color="white"
+        flat
+    >
+        <v-container class="py-0 fill-height">
+            <v-avatar
+                class="mr-10"
+                color="grey darken-1"
+                size="32"
+            ></v-avatar>
+            <router-link to="/">
+                <v-btn text>Home</v-btn>
+            </router-link>
 
+            <template v-if="!user">
+                <router-link to="/register">
+                    <v-btn text>Register</v-btn>
+                </router-link>
+                <router-link to="/login">
+                    <v-btn text>Login</v-btn>
+                </router-link>
             </template>
             <template v-else>
-                <v-tab>
-                    <router-link to="/people">Profile</router-link>
-                </v-tab>
-                <v-tab>
-                    <router-link to="/email-is-verified">Email Is Verified</router-link>
-                </v-tab>
-                <v-tab>
-                    <a href="#" @click.stop.prevent="logMeOut()">Log out</a>
-                </v-tab>
+                <router-link to="/people">
+                    <v-btn text>Profile</v-btn>
+                </router-link>
+                <router-link to="/email-is-verified">
+                    <v-btn text>Email Is Verified</v-btn>
+                </router-link>
+                <a href="#" @click.stop.prevent="logMeOut()">
+                    <v-btn text>Log out</v-btn>
+                </a>
             </template>
-        </v-tabs>
+
+
+            <v-spacer></v-spacer>
+
+            <v-responsive max-width="260">
+                <div v-if="user">User: <span style="color:cornflowerblue; font-weight: bolder;">{{ user.name }}</span></div>
+            </v-responsive>
+        </v-container>
     </v-app-bar>
 </template>
 
@@ -58,3 +74,13 @@ export default {
     },
 }
 </script>
+
+<style scoped>
+a {
+    padding: 0 !important;
+    margin: 0 !important;
+    box-sizing: content-box;
+    display: block !important;
+    text-decoration: none !important;
+}
+</style>

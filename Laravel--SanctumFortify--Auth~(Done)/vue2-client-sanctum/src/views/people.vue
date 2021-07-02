@@ -5,6 +5,8 @@
         tile
         v-if="users && users.length"
     >
+        <div style="padding: 10px 0; text-align: center;background-color: bisque">User List</div>
+        <hr>
         <v-list-item v-for="user in users" :key="user.id">
             <v-list-item-content>
                 <v-list-item-title>{{ user.name }}</v-list-item-title>
