@@ -4,19 +4,18 @@
             <p>Your email is not verified! <span class="text-blue-500">Please verify your email address.</span></p>
         </div>
 
-        <v-btn
-            elevation="2"
-            color="primary"
+        <b-button
+            variant="primary"
             @click="sendEmailVerificationLink">
             <span v-if="sendingEmail">Sending ...</span>
             <span v-else-if="emailSent">Email sent</span>
             <span v-else>Send Email Verification Link</span>
-        </v-btn>
+        </b-button>
     </div>
 </template>
 
 <script>
-import {mapActions} from "vuex";
+import {mapActions, mapGetters} from "vuex";
 
 export default {
     name: "verify-email",
@@ -25,6 +24,18 @@ export default {
             sendingEmail: false,
             emailSent: false,
             errors: []
+        }
+    },
+    computed: {
+        ...mapGetters({
+            user: 'auth/user',
+        })
+    },
+    mounted() {
+        if (this.user.email_verified_at != null) {
+            this.$router.push({
+                name: 'Home'
+            })
         }
     },
     methods: {

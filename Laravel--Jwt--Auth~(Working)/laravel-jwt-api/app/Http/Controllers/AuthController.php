@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -26,6 +27,7 @@ class AuthController extends Controller
         $v = Validator::make($request->all(), [
             // $validated = $request->validate([
             'name' => 'required|string|min:3|max:30',
+            'username' => 'required|string|min:3|max:30|unique:users',
             'email' => ['required', 'email', 'unique:users'],
             'password' => 'required|string|min:8|confirmed',
         ]);
@@ -37,10 +39,11 @@ class AuthController extends Controller
         }
         $user = new User();
         $user->name = $request->name;
+        $user->username = $request->username;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->save();
-        $this->login();
+        //$this->login();
         return response()->json(["message" => "User account created."], 200);
     }
 
@@ -51,17 +54,19 @@ class AuthController extends Controller
      */
     public function login(Request $request)
     {
-        $credentials = $request->only('email', 'password');
-        if ($token = auth()->attempt($credentials)) {
-            return response()->json([
-                'user' => \auth()->user(),
-                "access_token" => $token
-            ], 200)
-                ->header('Authorization', $token);
+        if ($token = Auth::attempt($request->only('username', 'password'))) {
+            $cookie = cookie('jwt', $token, 60 * 24 * 7); // 7 day
+            if (Auth::check()) {
+                return response()->json([
+                    'user' => Auth::user(),
+                    "access_token" => $token
+                ], 200)->header('Authorization', $token)->withCookie($cookie);
+            }
         }
         return response()->json(['error' => 'Unauthorized'], 401);
         // return response()->json(["user" => "", "access_token" => $this->respondWithToken($token)], 200);
     }
+
 
     /**
      * Get the authenticated User.
@@ -80,8 +85,8 @@ class AuthController extends Controller
      */
     public function logout()
     {
+        $cookie = Cookie::forget('jwt');
         auth()->logout();
-
         return response()->json(['message' => 'Successfully logged out']);
     }
 
@@ -109,5 +114,11 @@ class AuthController extends Controller
             'token_type' => 'bearer',
             'expires_in' => auth()->factory()->getTTL() * 60
         ]);
+    }
+
+    protected function emailNotification(Request $request)
+    {
+        $request->user()->sendEmailVerificationNotification();
+        return response()->json(['message' => 'Email Sent.'], 200);
     }
 }

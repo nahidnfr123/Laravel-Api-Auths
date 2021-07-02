@@ -1,19 +1,17 @@
 <template>
     <div>
         <div style="text-align: center; padding-top: 20px;">
-            Welcome to authentication with Laravel API (<span style="font-weight: bold;"> JWT </span>) and Vue.js Client.
+            Welcome to authentication with Laravel API (<span style="font-weight: bold;"> JWT </span>) and Vue.js
+            Client.
         </div>
     </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
 
 export default {
-  name: 'Home',
-  components: {
-    HelloWorld
-  }
+    name: 'Home',
+    components: {}
 }
 </script>

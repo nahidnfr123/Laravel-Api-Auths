@@ -1,25 +1,22 @@
 <template>
     <div>
-        <v-card
-            class="mx-auto"
-            max-width="400"
-            tile
-            v-if="users && users.length"
-        >
+        <b-list-group v-if="users && users.length">
             <div style="padding: 10px 0; text-align: center;background-color: bisque">User List</div>
             <hr>
-            <v-list-item v-for="user in users" :key="user.id">
-                <v-list-item-content>
-                    <v-list-item-title>{{ user.name }}</v-list-item-title>
-                    <v-list-item-subtitle>
-                        {{ user.username }}
-                    </v-list-item-subtitle>
-                    <v-list-item-subtitle>
-                        {{ user.email }}, <span v-if="user.email_verified_at" style="color: green; margin-left: 20px">Verified</span>
-                    </v-list-item-subtitle>
-                </v-list-item-content>
-            </v-list-item>
-        </v-card>
+            <b-list-group-item v-for="user in users" :key="user.id">
+                <div>
+                    <strong class="font-monospace">Name: </strong>{{ user.name }}
+                </div>
+                <div>
+                    <strong class="font-monospace">Username: </strong> {{ user.username }}
+                </div>
+                <div>
+                    <strong class="font-monospace">Email: </strong>
+                    {{ user.email }},
+                    <span v-if="user.email_verified_at" style="color: green; margin-left: 20px">Verified</span>
+                </div>
+            </b-list-group-item>
+        </b-list-group>
         <div v-else>
             <div style="text-align: center; padding-top: 20px; color: blueviolet; font-weight: bolder;">
                 No Users found ...

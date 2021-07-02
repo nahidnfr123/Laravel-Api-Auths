@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import {mapActions} from "vuex";
+import {mapActions, mapGetters} from "vuex";
 
 export default {
     name: "verify-email",
@@ -25,6 +25,18 @@ export default {
             sendingEmail: false,
             emailSent: false,
             errors: []
+        }
+    },
+    computed: {
+        ...mapGetters({
+            user: 'auth/user',
+        })
+    },
+    mounted() {
+        if (this.user.email_verified_at != null) {
+            this.$router.push({
+                name: 'Home'
+            })
         }
     },
     methods: {
