@@ -1,8 +1,9 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+    <div>
+        <div style="text-align: center; padding-top: 20px;">
+            Welcome to authentication with Laravel API (<span style="font-weight: bold;"> JWT </span>) and Vue.js Client.
+        </div>
+    </div>
 </template>
 
 <script>

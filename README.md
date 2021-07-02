@@ -7,3 +7,8 @@
 <h3 align="center">
     Client: Vue2, Nuxt.js
 </h3>
+
+    '''
+    Setup email in laravel .env file to implement Email verification.
+    '''
+    

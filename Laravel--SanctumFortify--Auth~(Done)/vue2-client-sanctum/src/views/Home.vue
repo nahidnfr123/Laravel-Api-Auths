@@ -1,7 +1,7 @@
 <template>
     <div>
         <div style="text-align: center; padding-top: 20px;">
-            Welcome to authentication with Laravel API and Vue.js Client.
+			Welcome to authentication with Laravel API (<span style="font-weight: bold;"> Sanctum </span>) and Vue.js Client.
         </div>
     </div>
 </template>
