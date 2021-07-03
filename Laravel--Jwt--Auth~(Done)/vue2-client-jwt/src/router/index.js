@@ -87,7 +87,7 @@ const routes = [
         component: () => import(/* webpackChunkName: "verify-email" */ '../views/EmailVerified.vue'),
         beforeEnter: requireEmailVerified
     },
-	 {
+    {
         path: '/*',
         name: 'page-not-found',
         component: () => import(/* webpackChunkName: "verify-email" */ '../views/404.vue'),

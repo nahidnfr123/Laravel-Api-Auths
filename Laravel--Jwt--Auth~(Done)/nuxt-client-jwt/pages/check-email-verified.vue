@@ -9,6 +9,5 @@
 <script>
 export default {
     middleware: ['auth', 'email-verified'],
-
 }
 </script>

@@ -16,7 +16,7 @@
 
 <script>
 export default {
-	middleware: ['auth'],
+    middleware: ['auth'],
     data() {
         return {
             sendingEmail: false,
@@ -24,10 +24,17 @@ export default {
             errors: []
         }
     },
+    mounted() {
+        if (this.$auth.user && this.$auth.user.email_verified_at) {
+            this.$router.push({
+                path: '/'
+            })
+        }
+    },
     methods: {
         sendEmailVerificationLink() {
             this.sendingEmail = true;
-            this.$axios.$post('/email/verification-notification').then((response) => {
+            this.$axios.$post('/api/auth/email/verification-notification').then((response) => {
                 this.emailSent = true;
             }).catch((error) => {
                 this.errors = error;

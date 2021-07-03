@@ -1,7 +1,7 @@
 export default {
     // Global page headers: https://go.nuxtjs.dev/config-head
     head: {
-        title: 'nuxt-sanctum-auth-client',
+        title: 'nuxt-jwt-auth-client',
         meta: [
             {charset: 'utf-8'},
             {name: 'viewport', content: 'width=device-width, initial-scale=1'},
@@ -53,19 +53,29 @@ export default {
     },
     auth: {
         strategies: {
-            'laravelSanctum': {
-                provider: 'laravel/sanctum',
+            'laravelJWT': {
+                provider: 'laravel/jwt',
                 url: 'http://localhost:8000',
                 endpoints: {
                     login: {
-                        url: '/login'
+                        url: '/api/auth/login'
                     },
                     logout: {
-                        url: '/logout'
+                        url: '/api/auth/logout'
+                    },
+                    refresh: {
+                        url: '/api/auth/refresh'
                     },
                     user: {
-                        url: '/api/user'
+                        url: '/api/auth/user'
                     },
+                },
+                token: {
+                    property: 'access_token',
+                    maxAge: 60 * 60
+                },
+                refreshToken: {
+                    maxAge: 20160 * 60
                 },
                 user: {
                     property: false
@@ -90,7 +100,7 @@ export default {
     // Build Configuration: https://go.nuxtjs.dev/config-build
     build: {},
     router: {
-        linkActiveClass: "",
+        linkActiveClass: "active",
         linkExactActiveClass: "active"
         // middleware: "guest",
     },
