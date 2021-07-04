@@ -1,4 +1,4 @@
-# nuxt-client-passport
+# nuxt-client
 
 ## Build Setup
 

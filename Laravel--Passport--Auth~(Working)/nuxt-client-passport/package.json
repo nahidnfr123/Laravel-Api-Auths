@@ -1,5 +1,5 @@
 {
-  "name": "nuxt-client-passport",
+  "name": "nuxt-client",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -9,12 +9,16 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "@nuxtjs/auth-next": "5.0.0-1624817847.21691f1",
     "@nuxtjs/axios": "^5.13.6",
     "@nuxtjs/pwa": "^3.3.5",
-    "bootstrap": "^4.6.0",
-    "bootstrap-vue": "^2.21.2",
+    "@nuxtjs/toast": "^3.3.1",
     "core-js": "^3.15.1",
     "nuxt": "^2.15.7"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@nuxt/types": "~2.15.0",
+    "@nuxtjs/tailwindcss": "^4.2.0",
+    "postcss": "^8.3.5"
+  }
 }

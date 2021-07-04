@@ -1,4 +1,4 @@
-# vue2-client-passport
+# vue2-client-jwt
 
 ## Project setup
 ```
